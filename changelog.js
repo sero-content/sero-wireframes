@@ -15,6 +15,14 @@
 
 window.SERO_CHANGELOG = [
   {
+    version: '1.1',
+    date: '2026-05-18',
+    summary: 'Interne design-annotaties verwijderd voor productie',
+    changes: [
+      { type: 'removed', text: 'Alle gele ⚠️ annotation-blokken weggehaald (waren design rationale, geen content). Wireframes zijn nu schoon voor Framer overname.', pages: 'ALL' }
+    ]
+  },
+  {
     version: '1.0',
     date: '2026-05-18',
     summary: 'Baseline wireframe set opgeleverd',
