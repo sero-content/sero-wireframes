@@ -680,15 +680,17 @@ body {
   color: #3a2c00;
 }
 
-/* === ANCHOR PULSE: korte highlight na klik op changelog item === */
-@keyframes wf-anchor-pulse-anim {
-  0%   { box-shadow: 0 0 0 0 rgba(239,108,0,0.55), 0 0 0 0 rgba(239,108,0,0.35); }
-  30%  { box-shadow: 0 0 0 6px rgba(239,108,0,0.45), 0 0 0 14px rgba(239,108,0,0.15); }
-  100% { box-shadow: 0 0 0 0 rgba(239,108,0,0),    0 0 0 0 rgba(239,108,0,0); }
+/* === ANCHOR FOCUS: aanhoudende glow na klik op changelog item ===
+   Pulseert tot de gebruiker elders klikt (of na 30s safety-net). */
+@keyframes wf-anchor-glow-anim {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(239,108,0,0.85), 0 0 0 10px rgba(239,108,0,0.30); }
+  50%      { box-shadow: 0 0 0 5px rgba(239,108,0,1.00), 0 0 0 18px rgba(239,108,0,0.55); }
 }
-.wf-anchor-pulse {
-  animation: wf-anchor-pulse-anim 2.2s ease-out;
-  border-radius: 8px;
+.wf-anchor-focused {
+  animation: wf-anchor-glow-anim 1.6s ease-in-out infinite;
+  border-radius: 10px;
+  position: relative;
+  z-index: 5;
 }
 
 /* === INLINE MARKER OP PAGINA (badge + tooltip on hover) === */

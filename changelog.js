@@ -22,8 +22,9 @@ window.SERO_CHANGELOG = [
     date: '2026-05-18',
     summary: 'Changelog-banner items klikbaar + inline markers met tooltip op gewijzigde elementen',
     changes: [
-      { type: 'new', text: 'Wijzigingen in de banner zijn nu klikbaar: een klik scrolt naar het element op de pagina en geeft het een korte highlight-pulse.', pages: 'ALL' },
-      { type: 'new', text: 'Gewijzigde elementen krijgen een inline marker (badge rechtsboven het element). Hover op de badge toont een tooltip met de details van de wijziging.', pages: 'ALL' }
+      { type: 'new', text: 'Wijzigingen in de banner zijn nu klikbaar: een klik scrolt naar het element op de pagina en geeft het een aanhoudende oranje glow-puls. De glow blijft pulseren tot je elders op de pagina klikt (safety-net: 30 seconden).', pages: 'ALL' },
+      { type: 'new', text: 'Gewijzigde elementen krijgen een inline marker (badge rechtsboven het element). Hover op de badge toont een tooltip met de details van de wijziging.', pages: 'ALL' },
+      { type: 'new', text: 'Scroll-offset wordt nu dynamisch berekend op basis van de werkelijke hoogte van sticky elementen (.wf-file-nav). Werkt daardoor consistent ook als de header-balk per pagina iets verschilt of wrapt op kleine schermen.', pages: 'ALL' }
     ]
   },
   {
@@ -79,22 +80,72 @@ window.SERO_CHANGELOG = [
     return t === 'new' ? 'Nieuw' : t === 'updated' ? 'Aangepast' : 'Verwijderd';
   }
 
-  // Scroll naar element + tijdelijke highlight pulse
+  // Bereken offset van sticky elementen bovenaan (file-nav + banner kunnen wisselen per pagina)
+  function getStickyOffset() {
+    var offset = 16; // ademruimte
+    var stickySelectors = ['.wf-file-nav'];
+    stickySelectors.forEach(function (sel) {
+      var node = document.querySelector(sel);
+      if (!node) return;
+      var style = window.getComputedStyle(node);
+      if (style.position === 'sticky' || style.position === 'fixed') {
+        offset += node.getBoundingClientRect().height;
+      }
+    });
+    return offset;
+  }
+
+  // Houdt de huidige focused anchor bij + dismiss helpers
+  var currentFocus = null;
+  function clearFocus() {
+    if (!currentFocus) return;
+    if (currentFocus.el) currentFocus.el.classList.remove('wf-anchor-focused');
+    if (currentFocus.dismissTimer) clearTimeout(currentFocus.dismissTimer);
+    if (currentFocus.clickHandler) document.removeEventListener('click', currentFocus.clickHandler, true);
+    currentFocus = null;
+  }
+
+  // Scroll naar element + aanhoudende glow tot je elders klikt
   function focusAnchor(selector) {
     var el = document.querySelector(selector);
     if (!el) return;
+
     // Sluit de banner zodat de pagina zichtbaar is na scroll
     var banner = document.getElementById('wf-changelog-banner');
     if (banner) banner.classList.remove('expanded');
-    // Scroll
-    try { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    catch (e) { el.scrollIntoView(); }
-    // Pulse
-    el.classList.remove('wf-anchor-pulse');
-    // force reflow zodat de animation opnieuw start
-    void el.offsetWidth;
-    el.classList.add('wf-anchor-pulse');
-    setTimeout(function () { el.classList.remove('wf-anchor-pulse'); }, 2400);
+
+    // Vorige focus wissen
+    clearFocus();
+
+    // Smooth scroll met dynamische offset (file-nav hoogte wisselt per pagina)
+    // Banner net gesloten — meet daarna pas in volgende frame
+    requestAnimationFrame(function () {
+      var rect = el.getBoundingClientRect();
+      var targetY = window.scrollY + rect.top - getStickyOffset();
+      try { window.scrollTo({ top: targetY, behavior: 'smooth' }); }
+      catch (e) { window.scrollTo(0, targetY); }
+    });
+
+    // Aanhoudende glow aanzetten (CSS animation loopt door tot class weg is)
+    void el.offsetWidth; // reflow
+    el.classList.add('wf-anchor-focused');
+
+    // Dismiss op klik buiten het element of buiten interactie-zones
+    var clickHandler = function (e) {
+      if (e.target.closest('.wf-inline-marker')) return;
+      if (e.target.closest('.wf-changelog-banner')) return;
+      if (e.target.closest(selector)) return;
+      clearFocus();
+    };
+    // Start luisteren ná een korte vertraging zodat de huidige klik niet meteen dismist
+    setTimeout(function () {
+      document.addEventListener('click', clickHandler, true);
+    }, 250);
+
+    // Safety net: na 30s automatisch dismissen
+    var dismissTimer = setTimeout(clearFocus, 30000);
+
+    currentFocus = { el: el, dismissTimer: dismissTimer, clickHandler: clickHandler };
   }
 
   function renderBanner() {
