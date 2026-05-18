@@ -655,6 +655,119 @@ body {
 .wf-section.is-new     { box-shadow: inset 5px 0 0 #2e7d32; }
 .wf-section.is-updated { box-shadow: inset 5px 0 0 #ef6c00; }
 
+/* === CHANGELOG: klikbare items in de banner === */
+.wf-changelog-version-block li.cl-clickable {
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 4px 8px;
+  margin-left: -8px;
+  margin-right: -8px;
+  transition: background 0.15s;
+}
+.wf-changelog-version-block li.cl-clickable:hover {
+  background: #fff3c4;
+}
+.wf-changelog-version-block li.cl-clickable .cl-jump {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #7a5500;
+  text-decoration: underline;
+  vertical-align: middle;
+}
+.wf-changelog-version-block li.cl-clickable:hover .cl-jump {
+  color: #3a2c00;
+}
+
+/* === ANCHOR PULSE: korte highlight na klik op changelog item === */
+@keyframes wf-anchor-pulse-anim {
+  0%   { box-shadow: 0 0 0 0 rgba(239,108,0,0.55), 0 0 0 0 rgba(239,108,0,0.35); }
+  30%  { box-shadow: 0 0 0 6px rgba(239,108,0,0.45), 0 0 0 14px rgba(239,108,0,0.15); }
+  100% { box-shadow: 0 0 0 0 rgba(239,108,0,0),    0 0 0 0 rgba(239,108,0,0); }
+}
+.wf-anchor-pulse {
+  animation: wf-anchor-pulse-anim 2.2s ease-out;
+  border-radius: 8px;
+}
+
+/* === INLINE MARKER OP PAGINA (badge + tooltip on hover) === */
+.wf-inline-marker {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  z-index: 50;
+  font-family: inherit;
+}
+.wf-inline-marker .wf-marker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ef6c00;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  cursor: help;
+  white-space: nowrap;
+}
+.wf-inline-marker.new .wf-marker-badge      { background: #2e7d32; }
+.wf-inline-marker.removed .wf-marker-badge  { background: #c62828; }
+
+.wf-inline-marker .wf-marker-tooltip {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 320px;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 12px 14px;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: normal;
+}
+.wf-inline-marker:hover .wf-marker-tooltip,
+.wf-inline-marker:focus-within .wf-marker-tooltip {
+  display: block;
+}
+.wf-inline-marker .wf-marker-tooltip-header {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #f5c842;
+  margin-bottom: 8px;
+}
+.wf-inline-marker .wf-marker-line {
+  margin-bottom: 8px;
+  color: #e8e8e8;
+}
+.wf-inline-marker .wf-marker-line:last-child { margin-bottom: 0; }
+.wf-inline-marker .wf-marker-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  margin-right: 6px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  color: #fff;
+  vertical-align: middle;
+}
+.wf-inline-marker .wf-marker-tag.new      { background: #2e7d32; }
+.wf-inline-marker .wf-marker-tag.updated  { background: #ef6c00; }
+.wf-inline-marker .wf-marker-tag.removed  { background: #c62828; }
+
 /* === UTILITY === */
 .mb-6  { margin-bottom: 6px; }
 .mb-8  { margin-bottom: 8px; }
