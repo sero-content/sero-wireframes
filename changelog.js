@@ -15,6 +15,17 @@
 
 window.SERO_CHANGELOG = [
   {
+    version: '1.2',
+    date: '2026-05-18',
+    summary: 'S7 flywheel vervangen door drie concrete keten-cards + homepage one-liners aangescherpt',
+    changes: [
+      { type: 'removed', text: 'S7 flywheel-cirkel met 8 tools rond Sero CDP verwijderd (te conceptueel, mismatch met 5-themas framing en abstracte Collect/Understand/Act legenda).', pages: ['index.html'] },
+      { type: 'new', text: 'S7 herontworpen naar drie concrete keten-cards (Conversie, Vindbaarheid, Capaciteit) met Signaal -> Beslissing -> Actie + Resultaat per keten, plus expliciete koppeling naar de betrokken Sero-themas.', pages: ['index.html'] },
+      { type: 'updated', text: 'Homepage tegel Data & Intelligence: feature-zin vervangen door outcome-zin "Een klantprofiel dat voorspelt wie koopt, en wanneer".', pages: ['index.html'] },
+      { type: 'updated', text: 'Homepage tegel Acquisition & Growth: feature-zin vervangen door outcome-zin "Vindbaar in zoekmachines en AI, zonder eindeloos contentwerk".', pages: ['index.html'] }
+    ]
+  },
+  {
     version: '1.1',
     date: '2026-05-18',
     summary: 'Interne design-annotaties verwijderd voor productie',
