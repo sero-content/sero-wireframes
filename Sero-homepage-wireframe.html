@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sero Homepage – Wireframe & Copy v3</title>
+<style>
+  :root {
+    --sero: #6B4FE8;
+    --sero-light: #EDE9FD;
+    --sero-dark: #3E2A9A;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --bg: #F9FAFB;
+    --white: #ffffff;
+    --label: #9CA3AF;
+    --green: #10B981;
+    --amber: #F59E0B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #EEEDF5; color: var(--text); font-size: 15px; line-height: 1.6; }
+
+  /* TOOLBAR */
+  .toolbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--sero-dark); color: white;
+    display: flex; align-items: center; gap: 16px;
+    padding: 10px 24px; font-size: 13px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .toolbar strong { font-size: 15px; margin-right: 8px; }
+  .toolbar .badge { background: rgba(255,255,255,0.15); border-radius: 99px; padding: 3px 10px; font-size: 11px; }
+  .toolbar span.hint { color: rgba(255,255,255,0.5); font-size: 11px; }
+
+  /* LAYOUT */
+  .page { max-width: 1100px; margin: 0 auto; padding: 28px 24px 80px; }
+
+  /* TOC */
+  .toc { background: var(--white); border-radius: 12px; padding: 18px 24px; margin-bottom: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .toc h3 { font-size: 11px; font-weight: 700; color: var(--sero); margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .toc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .toc-item { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 7px 10px; font-size: 11px; text-align: center; color: var(--muted); font-weight: 600; }
+
+  /* SECTION */
+  .section-divider { text-align: center; padding: 6px 0 20px; font-size: 10px; letter-spacing: 1.5px; color: var(--label); text-transform: uppercase; }
+  .section-wrap { margin-bottom: 24px; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .section-label { background: var(--sero); color: white; padding: 8px 20px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; display: flex; align-items: center; justify-content: space-between; }
+  .section-label .goal { font-weight: 400; opacity: 0.7; font-size: 11px; letter-spacing: 0; text-transform: none; }
+  .section-inner { background: var(--white); padding: 28px 32px; }
+
+  /* COPY BLOCK */
+  .copy-block { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 12px; position: relative; }
+  .copy-block:last-child { margin-bottom: 0; }
+  .copy-block.highlight { border: 2px solid var(--sero); background: #FAFAFE; }
+  .copy-label { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--sero); margin-bottom: 6px; }
+  .copy-text { font-size: 15px; color: var(--text); line-height: 1.65; user-select: text; }
+  .copy-text.headline { font-size: 28px; font-weight: 800; line-height: 1.2; }
+  .copy-text.subline { font-size: 17px; color: var(--muted); line-height: 1.6; }
+  .copy-text.h2 { font-size: 22px; font-weight: 700; line-height: 1.3; }
+  .copy-text.h3 { font-size: 17px; font-weight: 700; line-height: 1.35; }
+  .copy-text.small { font-size: 13px; color: var(--muted); }
+
+  .copy-btn { position: absolute; top: 12px; right: 12px; background: var(--sero-light); color: var(--sero); border: none; border-radius: 6px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; opacity: 0; transition: opacity 0.15s; }
+  .copy-block:hover .copy-btn { opacity: 1; }
+  .copy-btn.copied { background: var(--green); color: white; opacity: 1; }
+
+  /* NOTE */
+  .note { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 10px 16px; font-size: 12px; color: #92400E; margin-bottom: 12px; display: flex; gap: 8px; }
+  .note.blue { background: #EFF6FF; border-color: #BFDBFE; color: #1E40AF; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; }
+
+  /* VISUAL PLACEHOLDER */
+  .visual { background: linear-gradient(135deg, #EDE9FD, #DDD6FE); border-radius: 10px; min-height: 120px; display: flex; align-items: center; justify-content: center; color: var(--sero); font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; border: 2px dashed #C4B5FD; }
+
+  /* BUTTONS */
+  .cta-group { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--sero); color: white; border-radius: 8px; padding: 11px 22px; font-size: 14px; font-weight: 600; display: inline-block; }
+  .btn-secondary { color: var(--sero); border: 2px solid var(--sero); border-radius: 8px; padding: 11px 22px; font-size: 14px; font-weight: 600; display: inline-block; }
+
+  /* LOGO BAR */
+  .logo-bar { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .logo-pill { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 8px 20px; font-size: 13px; font-weight: 600; color: var(--muted); }
+
+  /* THEME TABS */
+  .theme-tabs { display: flex; flex-wrap: wrap; border-bottom: 2px solid var(--border); margin-bottom: 24px; }
+  .theme-tab { padding: 10px 18px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.15s; white-space: nowrap; }
+  .theme-tab:hover { color: var(--sero); }
+  .theme-tab.active { color: var(--sero); border-bottom-color: var(--sero); }
+  .theme-panel { display: none; }
+  .theme-panel.active { display: block; }
+
+  /* THEME GRID */
+  .theme-rows { display: flex; flex-direction: column; gap: 0; }
+  .theme-row { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-bottom: 12px; align-items: start; }
+  .theme-row:last-child { margin-bottom: 0; }
+
+  /* STEPS */
+  .steps { display: flex; gap: 0; }
+  .step { flex: 1; text-align: center; padding: 0 16px; position: relative; }
+  .step::after { content: '→'; position: absolute; right: -10px; top: 18px; color: var(--sero); font-size: 18px; font-weight: 700; }
+  .step:last-child::after { display: none; }
+  .step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--sero); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; margin: 0 auto 10px; }
+  .step-title { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+  .step-copy { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* MODULE CARDS */
+  .module-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .module-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .module-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--sero-light); color: var(--sero); display: flex; align-items: center; justify-content: center; font-size: 15px; margin-bottom: 10px; }
+  .module-name { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .module-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* STATS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .stat-block { text-align: center; background: var(--sero-light); border-radius: 10px; padding: 20px 12px; }
+  .stat-num { font-size: 32px; font-weight: 800; color: var(--sero); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+  /* INTEGRATIONS */
+  .int-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+  .int-chip { background: var(--bg); border: 1px solid var(--border); border-radius: 99px; padding: 5px 14px; font-size: 12px; font-weight: 600; color: var(--muted); }
+
+  /* QUOTE */
+  .quote-block { background: var(--sero-light); border-radius: 12px; padding: 24px 28px; border-left: 4px solid var(--sero); }
+  .quote-text { font-size: 16px; font-style: italic; color: var(--text); line-height: 1.6; margin-bottom: 10px; }
+  .quote-attr { font-size: 13px; font-weight: 600; color: var(--muted); }
+
+  /* MODULAR CALLOUT */
+  .modular-note { background: linear-gradient(135deg, #EDE9FD, #F0EDFF); border: 1px solid #C4B5FD; border-radius: 10px; padding: 14px 20px; margin-bottom: 12px; font-size: 13px; color: var(--sero-dark); line-height: 1.6; }
+  .modular-note strong { display: block; margin-bottom: 4px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <strong>Sero</strong>
+  <span class="badge">Homepage Wireframe v3</span>
+  <span class="hint">Hover over blok → kopieerknop · Selecteer tekst om te kopiëren</span>
+</div>
+
+<div class="page">
+
+  <div class="toc">
+    <h3>Paginastructuur</h3>
+    <div class="toc-grid">
+      <div class="toc-item">① Nav</div>
+      <div class="toc-item">② Hero</div>
+      <div class="toc-item">③ Logo's</div>
+      <div class="toc-item">④ Screenshots</div>
+      <div class="toc-item">⑤ Thema's</div>
+      <div class="toc-item">⑥ How it works</div>
+      <div class="toc-item">⑦ Modules</div>
+      <div class="toc-item">⑧ Integraties</div>
+      <div class="toc-item">⑨ Resultaten</div>
+      <div class="toc-item">⑩ CTA</div>
+    </div>
+  </div>
+
+  <!-- ① NAV -->
+  <div class="section-divider">① Navigatie</div>
+  <div class="section-wrap">
+    <div class="section-label">NAV <span class="goal">Oriëntatie + hoge CTA-zichtbaarheid</span></div>
+    <div class="section-inner">
+      <div class="grid-2">
+        <div class="copy-block">
+          <div class="copy-label">Navigatielinks</div>
+          <div class="copy-text">Oplossingen &nbsp;·&nbsp; Modules &nbsp;·&nbsp; Cases &nbsp;·&nbsp; Over Sero</div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+        <div class="copy-block highlight">
+          <div class="copy-label">Primaire CTA, altijd zichtbaar</div>
+          <div class="copy-text"><strong>Plan een demo</strong></div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② HERO -->
+  <div class="section-divider">② Hero</div>
+  <div class="section-wrap">
+    <div class="section-label">HERO <span class="goal">Eerste viewport · Clarity + relevantie + momentum in 3 seconden</span></div>
+    <div class="section-inner">
+      <div class="note">💡 Twee headline-opties. Neuromarketing: stelling → context → actie. Lezer voelt herkenning vóór uitleg. Aanbeveling: Optie A voor directe helderheid over het modulaire karakter van Sero.</div>
+
+      <div class="grid-2" style="margin-bottom:12px;">
+        <div class="copy-block highlight">
+          <div class="copy-label">🔵 Headline Optie A, aanbevolen</div>
+          <div class="copy-text headline">Je winkel draait. Je data niet.</div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+        <div class="copy-block">
+          <div class="copy-label">Headline Optie B, punchier, meer urgentie</div>
+          <div class="copy-text headline">Je concurrenten gebruiken al wat jij nog overweegt.</div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+      </div>
+
+      <div class="copy-block" style="margin-bottom:12px;">
+        <div class="copy-label">Sub-headline / mini-alinea, neuromarketing: probleemherkenning + outcome + modulaire positionering</div>
+        <div class="copy-text subline">Je hebt data. Je hebt tools. Maar ze werken niet samen. Sero is de AI-stack die dat wel doet. Begin waar het het meeste pijn doet. Voeg toe wanneer het klopt.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-label">CTA's + friction-reducer</div>
+        <div class="cta-group" style="margin-bottom:10px;">
+          <div class="btn-primary">Plan een demo</div>
+          <div class="btn-secondary">Bekijk de modules</div>
+        </div>
+        <div class="copy-text small">✓ Geen verplichtingen &nbsp;·&nbsp; ✓ Modulair inzetbaar &nbsp;·&nbsp; ✓ Live binnen weken</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+
+      <div class="note" style="margin-top:12px;">🎨 Visueel: grote typografie links. Rechts animated interface-preview of screenshot-collage van meerdere Sero modules naast elkaar, onderstreept de modulaire opbouw. Donkere achtergrond of deep purple gradient.</div>
+    </div>
+  </div>
+
+  <!-- ③ LOGO'S -->
+  <div class="section-divider">③ Social proof – klantlogo's</div>
+  <div class="section-wrap">
+    <div class="section-label">LOGO BAR <span class="goal">Trust via associatie · Direct onder hero</span></div>
+    <div class="section-inner">
+      <div class="copy-block">
+        <div class="copy-label">Label boven logo-balk, neuromarketing: social proof</div>
+        <div class="copy-text small" style="text-align:center; margin-bottom:14px;">Vertrouwd door e-commerceteams die niet willen wachten.</div>
+        <div class="logo-bar">
+          <div class="logo-pill">Klant A</div>
+          <div class="logo-pill">Klant B</div>
+          <div class="logo-pill">Klant C</div>
+          <div class="logo-pill">Klant D</div>
+          <div class="logo-pill">Klant E</div>
+          <div class="logo-pill">Klant F</div>
+        </div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ SCREENSHOTS -->
+  <div class="section-divider">④ Product screenshots</div>
+  <div class="section-wrap">
+    <div class="section-label">PRODUCT PREVIEW <span class="goal">Visueel vertrouwen · "Dit is hoe het eruitziet"</span></div>
+    <div class="section-inner">
+      <div class="note">🎨 2–3 interface screenshots of gestylde mockup-carousel van verschillende modules naast elkaar. Geen uitgebreide copy, puur visueel bewijs dat de breedte van de stack zichtbaar maakt.</div>
+      <div class="grid-3">
+        <div class="visual">Screenshot: Sero Dashboard</div>
+        <div class="visual">Screenshot: AI Segmentatie</div>
+        <div class="visual">Screenshot: Shopping Assistant</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ THEMA'S -->
+  <div class="section-divider">⑤ Toepassingsgebieden – de 5 thema's</div>
+  <div class="section-wrap">
+    <div class="section-label">THEMA SECTIE <span class="goal">Toepassingen verduidelijken · Interactieve slider per thema</span></div>
+    <div class="section-inner">
+
+      <div class="copy-block" style="margin-bottom:12px;">
+        <div class="copy-label">Sectie headline, neuromarketing: curiosity + belofte</div>
+        <div class="copy-text h2">Waar lekt jouw e-commerce het meeste marge?</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+      <div class="copy-block" style="margin-bottom:12px;">
+        <div class="copy-label">Sectie intro, neuromarketing: probleemherkenning + modulaire positionering</div>
+        <div class="copy-text">Sero is geen complete ombouw. Je kiest één module, op de plek waar het pijn doet. Elke week dat je wacht, kost geld dat je niet terugkrijgt.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+
+      <div class="modular-note">
+        <strong>Over de modules</strong>
+        Elke module werkt op zichzelf. Maar ze zijn gebouwd om samen te denken. Hoe meer je combineert, hoe slimmer het geheel. Dat is het verschil tussen tools en een stack.
+      </div>
+
+      <div class="note blue">📖 <strong>Storyline-principe per thema:</strong> elk thema vertelt een mini-verhaal in 4 beats, context/probleem → eerste oplossing → tweede oplossing → payoff. De blokken vormen een doorlopend verhaal dat je ook los kunt scannen.</div>
+
+      <!-- TABS -->
+      <div class="theme-tabs">
+        <div class="theme-tab active" onclick="switchTab(this,'data')">Data &amp; Intelligence</div>
+        <div class="theme-tab" onclick="switchTab(this,'acquisition')">Acquisition &amp; Growth</div>
+        <div class="theme-tab" onclick="switchTab(this,'content')">Content &amp; Creation</div>
+        <div class="theme-tab" onclick="switchTab(this,'experience')">Experience &amp; Conversion</div>
+        <div class="theme-tab" onclick="switchTab(this,'support')">Support &amp; Operations</div>
+      </div>
+
+      <!-- ===== DATA & INTELLIGENCE ===== -->
+      <div class="theme-panel active" id="panel-data">
+        <div class="copy-block highlight" style="margin-bottom:12px;">
+          <div class="copy-label">Thema description, max 12 woorden</div>
+          <div class="copy-text h3">Klantgedrag, orders, retours. Sero zet het direct om in actie.</div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+        <div class="note">📦 <strong>Modules:</strong> Sero CDP (centraal) · Sero Feeds (productfeed verrijking en distributie)<br>🧭 <strong>Differentiator:</strong> anderen geven je een segmentatiebouwer met handmatige regels. Sero's AI herkent klantgroepen zelf op basis van gedrag, orders, kosten en intentie. En activeert direct, on-site én op elk kanaal, volledig automatisch.</div>
+        <div class="theme-rows">
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Titel</div>
+              <div class="copy-text h3">Elke dag stuur je kansrijke klanten weg zonder het te weten.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Copy (max 12 woorden) · Sero CDP</div>
+              <div class="copy-text">Orders, klikken, retours. Alles vertelt iets. Sero luistert automatisch.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Titel</div>
+              <div class="copy-text h3">Je beste klanten zijn niet je grootste kopers. Sero weet wie het wel zijn.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Copy (max 12 woorden) · AI auto-segmentatie</div>
+              <div class="copy-text">Geen handmatige regels. Sero herkent patronen die jij niet ziet. En activeert ze direct.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Titel</div>
+              <div class="copy-text h3">Je productfeed weet alles. Maar zegt het verkeerd.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Copy (max 12 woorden) · Sero Feeds</div>
+              <div class="copy-text">Sero Feeds schrijft je productteksten, titels en beelden. Direct klaar voor elk platform.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Titel</div>
+              <div class="copy-text h3">Van inzicht naar actie. Zonder tussenkomst.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Copy (max 12 woorden) · activatie + human touch</div>
+              <div class="copy-text">Sero handelt op wat het leert. Campagne, content, kanaal. Op het juiste moment.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ACQUISITION & GROWTH ===== -->
+      <div class="theme-panel" id="panel-acquisition">
+        <div class="copy-block highlight" style="margin-bottom:12px;">
+          <div class="copy-label">Thema description, max 12 woorden</div>
+          <div class="copy-text h3">Je klanten zoeken. Jij staat er niet. Sero verandert dat.</div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+        <div class="note">📦 <strong>Module:</strong> Sero Reach: SEO AI-agents, geautomatiseerde contentstrategie, GEO-optimalisatie (zichtbaarheid in ChatGPT, Perplexity, Google AI)</div>
+        <div class="theme-rows">
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Titel</div>
+              <div class="copy-text h3">Elke dag zoeken klanten naar wat jij verkoopt. Ze vinden jou niet.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Copy (max 12 woorden) · Sero Reach</div>
+              <div class="copy-text">Sero Reach analyseert zoekintentie en publiceert content die rankt. Zonder dat jij er iets voor doet.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Titel</div>
+              <div class="copy-text h3">ChatGPT noemt jouw concurrent. Niet jou.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Copy (max 12 woorden) · GEO</div>
+              <div class="copy-text">AI-zoekers geven antwoorden, geen lijsten. Sero zorgt dat jij het antwoord bent.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Titel</div>
+              <div class="copy-text h3">Je contentstrategie wordt vandaag gebouwd. En morgen al uitgevoerd.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Copy (max 12 woorden) · replace vs. improve</div>
+              <div class="copy-text">Sero genereert, plant en publiceert. Geen brief, geen bureau, geen wachten.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Titel</div>
+              <div class="copy-text h3">Terwijl jij slaapt, klimt jouw shop in de rankings.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Copy (max 12 woorden) · always-on groei</div>
+              <div class="copy-text">Rankings dalen? Sero past aan. Nieuwe producten? Content staat er al.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CONTENT & CREATION ===== -->
+      <div class="theme-panel" id="panel-content">
+        <div class="copy-block highlight" style="margin-bottom:12px;">
+          <div class="copy-label">Thema description, max 12 woorden</div>
+          <div class="copy-text h3">Teksten, beelden, campagnes. Zonder schrijvers, fotografen of bureau.</div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+        <div class="note">📦 <strong>Modules:</strong> Sero Operate (AI-assistent voor e-commerce taken en operaties) · Sero Fashion (professionele fashion fotografie op AI-schaal) · Sero Productshot (AI-productfotografie voor non-fashion) · Sero Studio (maatwerk AI-toepassingen per businesscase)</div>
+        <div class="theme-rows">
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Titel</div>
+              <div class="copy-text h3">Duizend producten. Nul schrijvers nodig.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Copy (max 12 woorden) · Sero Operate</div>
+              <div class="copy-text">Elke pagina. Elk product. Elke categorie. Sero Operate schrijft het. Jij beoordeelt het.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Titel</div>
+              <div class="copy-text h3">Studio-kwaliteit. Zonder studio.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Copy (max 12 woorden) · Sero Fashion + Sero Productshot</div>
+              <div class="copy-text">Upload een product. Ontvang campagne-klare beelden. Onbeperkt en op schaal.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Titel</div>
+              <div class="copy-text h3">Kleding met model. Product zonder. Allebei in één klik.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Copy (max 12 woorden) · Fashion vs. Productshot</div>
+              <div class="copy-text">Sero Fashion kiest model en setting voor je. Productshot doet hetzelfde, zonder model.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Titel</div>
+              <div class="copy-text h3">Geen standaard uitdaging? Geen standaard oplossing.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Copy (max 12 woorden) · Sero Studio</div>
+              <div class="copy-text">Sero Studio bouwt AI-toepassingen op maat. Voor businesscases die niet in een template passen.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== EXPERIENCE & CONVERSION ===== -->
+      <div class="theme-panel" id="panel-experience">
+        <div class="copy-block highlight" style="margin-bottom:12px;">
+          <div class="copy-label">Thema description, max 12 woorden</div>
+          <div class="copy-text h3">Twijfel kost je omzet. Sero haalt het weg voor ze vertrekken.</div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+        <div class="note">📦 <strong>Modules:</strong> Sero Visual Search (vinden op beeld) · Sero Try Before You Buy (productervaring direct vanuit de productpagina) · Sero Shopping Assistant (realtime begeleiding richting aankoop)<br>🧭 <strong>Storyline:</strong> zoeken → ervaren → begeleid worden → kopen. Elke module pakt een andere drempel weg.</div>
+        <div class="theme-rows">
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Titel</div>
+              <div class="copy-text h3">De grootste conversiekiller is geen prijs. Het is twijfel.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Copy (max 12 woorden) · context</div>
+              <div class="copy-text">70% van de bezoekers vertrekt zonder te kopen. Bijna nooit vanwege de prijs.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Titel</div>
+              <div class="copy-text h3">Klanten weten niet wat ze zoeken. Ze weten wel hoe het eruitziet.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Copy (max 12 woorden) · Sero Visual Search</div>
+              <div class="copy-text">Upload een foto. Ontvang exacte resultaten. Zonder één zoekwoord te typen.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Titel</div>
+              <div class="copy-text h3">Retour is geen service. Het is een bewijs dat de koop niet klopte.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Copy (max 12 woorden) · Sero Try Before You Buy</div>
+              <div class="copy-text">Try Before You Buy laat klanten zien hoe het thuisziet. Minder twijfel, minder retour.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Titel</div>
+              <div class="copy-text h3">Elke bezoeker heeft een vraag. De meeste stellen hem nooit.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Copy (max 12 woorden) · Sero Shopping Assistant</div>
+              <div class="copy-text">Sero Shopping Assistant grijpt in voor ze afhaken. Op het moment dat het telt.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 5. Titel</div>
+              <div class="copy-text h3">Minder retour. Meer vertrouwen. Hogere conversie.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 5. Copy (max 12 woorden) · payoff: drie modules samen</div>
+              <div class="copy-text">Drie modules. Elk een drempel weg. Samen sluiten ze de journey.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SUPPORT & OPERATIONS ===== -->
+      <div class="theme-panel" id="panel-support">
+        <div class="copy-block highlight" style="margin-bottom:12px;">
+          <div class="copy-label">Thema description, max 12 woorden</div>
+          <div class="copy-text h3">24/7 klantenservice die écht afhandelt. Zonder extra mensen.</div>
+          <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+        </div>
+        <div class="note">📦 <strong>Module:</strong> Sero Support Agent: AI-agent die klantenservice schaalt zonder extra headcount. Begrijpt vragen, raadpleegt systemen, voert acties uit, antwoordt 24/7 in jouw tone of voice.</div>
+        <div class="theme-rows">
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Titel</div>
+              <div class="copy-text h3">Klantenservice schalen. Zonder meer mensen.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 1. Copy (max 12 woorden) · context</div>
+              <div class="copy-text">Meer volume, meer druk. Sero neemt het over. Kwaliteit blijft.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Titel</div>
+              <div class="copy-text h3">Geen chatbot die doorverwijst. Een agent die afhandelt.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 2. Copy (max 12 woorden) · differentiator</div>
+              <div class="copy-text">Begrijpt de vraag, raadpleegt systemen, lost op. 24/7 in jouw tone of voice.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Titel</div>
+              <div class="copy-text h3">Je team is er voor mensen. Niet voor herhaling.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 3. Copy (max 12 woorden) · operationele winst</div>
+              <div class="copy-text">Routinevragen verdwijnen. Jouw team richt zich op wat écht telt.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+          <div class="theme-row">
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Titel</div>
+              <div class="copy-text h3">Klanten wachten niet. Jouw team overwerkt niet. Iedereen blij.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+            <div class="copy-block">
+              <div class="copy-label">Blok 4. Copy (max 12 woorden) · payoff</div>
+              <div class="copy-text">Minder wachttijd. Minder druk. Meer tevreden klanten. Alles tegelijk, vanaf dag één.</div>
+              <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ⑥ HOW IT WORKS -->
+  <div class="section-divider">⑥ How it works</div>
+  <div class="section-wrap">
+    <div class="section-label">HOW IT WORKS <span class="goal">Complexiteit verlagen · 3 stappen max · logische flow</span></div>
+    <div class="section-inner">
+
+      <div class="copy-block" style="margin-bottom:20px;">
+        <div class="copy-label">Sectie headline</div>
+        <div class="copy-text h2">Begin klein. Schaal snel. Betaal voor wat werkt.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+      <div class="copy-block" style="margin-bottom:24px;">
+        <div class="copy-label">Sectie intro, modulaire positionering</div>
+        <div class="copy-text">Geen groot implementatietraject. Sero sluit aan op wat je al hebt. Kies een startpunt. Resultaat volgt.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Kies je startpunt</div>
+          <div class="step-copy">Eén module, op de plek waar het nu het meeste pijn doet.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">Sero leert jouw winkel</div>
+          <div class="step-copy">Geen handmatige configuratie. Sero verbindt, leert en begint. Direct.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">Schaal waar het loont</div>
+          <div class="step-copy">Elke module die je toevoegt, maakt de vorige slimmer. Zo werkt een stack.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ MODULES -->
+  <div class="section-divider">⑦ Alle modules</div>
+  <div class="section-wrap">
+    <div class="section-label">MODULE OVERZICHT <span class="goal">Volledigheid tonen · Elke module als zelfstandige waarde</span></div>
+    <div class="section-inner">
+
+      <div class="copy-block" style="margin-bottom:20px;">
+        <div class="copy-label">Sectie headline</div>
+        <div class="copy-text h2">Tien modules. Begin met één. Groei naar alles wat loont.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+      <div class="copy-block" style="margin-bottom:20px;">
+        <div class="copy-label">Sectie intro</div>
+        <div class="copy-text">Elke module staat op zichzelf. Maar ze denken samen. Je start waar het zinvol is en schaalt verder als de businesscase klopt.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+
+      <div class="module-cards">
+        <div class="module-card">
+          <div class="module-icon">📊</div>
+          <div class="module-name">Sero Feeds</div>
+          <div class="module-desc">Productfeed naar titels, teksten en beelden. Op schaal, elk platform, elke taal.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🔍</div>
+          <div class="module-name">Sero Reach</div>
+          <div class="module-desc">SEO en AI-search. Zichtbaar waar jouw klanten zoeken, ook in ChatGPT en Perplexity.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">⚙️</div>
+          <div class="module-name">Sero Operate</div>
+          <div class="module-desc">Schrijft alles wat jouw team steeds opnieuw doet. Productteksten, categorieteksten, operaties.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">👗</div>
+          <div class="module-name">Sero Fashion</div>
+          <div class="module-desc">Upload een kledingstuk. Kies een model en setting. Ontvang campagnebeelden. Op schaal.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">📸</div>
+          <div class="module-name">Sero Productshot</div>
+          <div class="module-desc">Studio-kwaliteit zonder fotostudio. Productshots op schaal, consistent en direct bruikbaar.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🛠️</div>
+          <div class="module-name">Sero Studio</div>
+          <div class="module-desc">AI op maat voor businesscases die niet in een standaard tool passen.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🏠</div>
+          <div class="module-name">Try Before You Buy</div>
+          <div class="module-desc">Laat klanten zien hoe het er thuis uitziet. Minder twijfel. Minder retour.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">💬</div>
+          <div class="module-name">Shopping Assistant</div>
+          <div class="module-desc">Grijpt in voor ze afhaken. Op het moment dat het telt.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🔎</div>
+          <div class="module-name">Visual Search</div>
+          <div class="module-desc">Vinden op beeld. Ze weten hoe het eruitziet, niet hoe het heet.</div>
+        </div>
+        <div class="module-card">
+          <div class="module-icon">🤖</div>
+          <div class="module-name">Support Agent</div>
+          <div class="module-desc">Begrijpt de vraag, raadpleegt systemen, handelt af. 24/7 in jouw tone of voice.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑧ INTEGRATIES -->
+  <div class="section-divider">⑧ Integraties</div>
+  <div class="section-wrap">
+    <div class="section-label">INTEGRATIES <span class="goal">Risicobeperking · "Past in jouw stack"</span></div>
+    <div class="section-inner">
+      <div class="copy-block" style="margin-bottom:16px;">
+        <div class="copy-label">Sectie headline</div>
+        <div class="copy-text h2">Sero sluit aan op wat je al hebt.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+      <div class="copy-block" style="margin-bottom:16px;">
+        <div class="copy-label">Sectie intro, risicoverlaging</div>
+        <div class="copy-text">Geen migratie. Geen grote IT-projecten. Sero verbindt met je bestaande platform, kanalen en tools. Jij bepaalt wat je aansluit en wanneer.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+      <div class="copy-block">
+        <div class="copy-label">Platforms en kanalen</div>
+        <div class="int-grid">
+          <div class="int-chip">Shopify</div>
+          <div class="int-chip">Magento</div>
+          <div class="int-chip">WooCommerce</div>
+          <div class="int-chip">Lightspeed</div>
+          <div class="int-chip">Google Ads</div>
+          <div class="int-chip">Meta Ads</div>
+          <div class="int-chip">Klaviyo</div>
+          <div class="int-chip">Channable</div>
+          <div class="int-chip">Bol.com</div>
+          <div class="int-chip">Amazon</div>
+          <div class="int-chip">Salesforce</div>
+          <div class="int-chip">+ meer</div>
+        </div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑨ RESULTATEN -->
+  <div class="section-divider">⑨ Resultaten &amp; social proof</div>
+  <div class="section-wrap">
+    <div class="section-label">PROOF <span class="goal">Vertrouwen opbouwen · Cijfers + quote</span></div>
+    <div class="section-inner">
+
+      <div class="copy-block" style="margin-bottom:20px;">
+        <div class="copy-label">Sectie headline</div>
+        <div class="copy-text h2">Eén module. Dit zagen ze binnen zes weken.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+      <div class="copy-block" style="margin-bottom:20px;">
+        <div class="copy-label">Sectie intro, neuromarketing: curiosity + bewijs</div>
+        <div class="copy-text">Gerichte start. Snelle resultaten. Dit zag elk team dat begon met één module.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+
+      <div class="stats-row" style="margin-bottom:20px;">
+        <div class="stat-block">
+          <div class="stat-num">+34%</div>
+          <div class="stat-label">hogere conversie via Shopping Assistant</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">60%</div>
+          <div class="stat-label">minder handmatig SEO-werk</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">3×</div>
+          <div class="stat-label">meer beeldproductie zonder extra kosten</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">klantenservice zonder extra headcount</div>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        <div class="quote-text">"We zijn begonnen met Sero Reach. Binnen zes weken hadden we meer organisch verkeer dan in het hele kwartaal daarvoor. Nu draaien we drie modules."</div>
+        <div class="quote-attr">Naam, functie · Bedrijfsnaam</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑩ CLOSING CTA -->
+  <div class="section-divider">⑩ Closing CTA</div>
+  <div class="section-wrap">
+    <div class="section-label">CLOSING CTA <span class="goal">Finale actie · Één duidelijke CTA · Urgentie zonder druk</span></div>
+    <div class="section-inner">
+
+      <div class="copy-block highlight" style="margin-bottom:12px;">
+        <div class="copy-label">Sectie headline, payoff van het hele verhaal</div>
+        <div class="copy-text h2">Een uur demo. Weken eerder resultaat.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+
+      <div class="copy-block" style="margin-bottom:12px;">
+        <div class="copy-label">Subline, modular framing + low-friction</div>
+        <div class="copy-text subline">Je hoeft niet alles tegelijk. Eén module, één besluit, één demo. We denken mee welke module de meeste impact maakt voor jouw situatie van nu.</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-label">CTA's</div>
+        <div class="cta-group" style="margin-bottom:10px;">
+          <div class="btn-primary">Plan een demo</div>
+          <div class="btn-secondary">Bekijk alle modules</div>
+        </div>
+        <div class="copy-text small">✓ Gratis en vrijblijvend &nbsp;·&nbsp; ✓ Advies op maat &nbsp;·&nbsp; ✓ Live binnen weken</div>
+        <button class="copy-btn" onclick="copyText(this)">Kopieer</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function switchTab(el, panelId) {
+  document.querySelectorAll('.theme-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.theme-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-' + panelId).classList.add('active');
+}
+
+function copyText(btn) {
+  const block = btn.closest('.copy-block');
+  const texts = [...block.querySelectorAll('.copy-text')].map(el => el.innerText).join('\n');
+  navigator.clipboard.writeText(texts).then(() => {
+    btn.textContent = 'Gekopieerd!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Kopieer';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>

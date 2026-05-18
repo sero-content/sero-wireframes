@@ -1,0 +1,683 @@
+/* ============================================================
+   SERO WEBSITE — GEDEELDE WIREFRAME STYLESHEET
+   Versie: 1.0  |  Stijl: Wireframe (geen design)
+   ============================================================ */
+
+/* === RESET === */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* === BASE === */
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f0f0f0;
+  color: #1a1a1a;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* === WIREFRAME PAGE NAV (interne navigatie tussen bestanden) === */
+.wf-file-nav {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 10px 24px;
+  font-size: 11px;
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.wf-file-nav-label {
+  color: #666;
+  margin-right: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.wf-file-nav a {
+  color: #aaa;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-right: 1px solid #333;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.wf-file-nav a:hover { color: #fff; background: #333; }
+.wf-file-nav a.current { color: #fff; background: #444; font-weight: bold; }
+.wf-file-nav .sep { color: #444; padding: 0 8px; font-size: 10px; }
+
+/* === PAGINA WRAPPER === */
+.wf-page { background: #fff; }
+
+/* === SECTIE ANNOTATIES === */
+.wf-section {
+  border-bottom: 2px dashed #e0e0e0;
+  position: relative;
+}
+.wf-section-label {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #bbb;
+  background: #fff;
+  padding: 2px 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  z-index: 10;
+}
+
+/* === GLOBALE NAVIGATIE === */
+.wf-nav {
+  background: #fff;
+  border-bottom: 2px solid #1a1a1a;
+  padding: 0 48px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.wf-nav-logo {
+  width: 88px;
+  height: 32px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  flex-shrink: 0;
+  margin-right: 40px;
+}
+.wf-nav-items {
+  display: flex;
+  gap: 28px;
+  flex: 1;
+  align-items: center;
+}
+.wf-nav-item {
+  font-size: 13px;
+  color: #333;
+  text-decoration: none;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.wf-nav-item.has-dd::after { content: ' ▾'; font-size: 10px; color: #999; }
+.wf-nav-item.active { font-weight: bold; border-bottom: 2px solid #1a1a1a; }
+.wf-nav-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* === BREADCRUMB === */
+.wf-breadcrumb {
+  font-size: 12px;
+  color: #888;
+  padding: 10px 48px;
+  background: #fafafa;
+  border-bottom: 1px solid #ebebeb;
+}
+.wf-breadcrumb a { color: #888; text-decoration: underline; }
+.wf-breadcrumb span { color: #555; }
+
+/* === KNOPPEN === */
+.wf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border: 2px solid #1a1a1a;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  color: #1a1a1a;
+  background: transparent;
+  white-space: nowrap;
+}
+.wf-btn.primary { background: #1a1a1a; color: #fff; }
+.wf-btn.sm { padding: 7px 16px; font-size: 11px; }
+.wf-btn.lg { padding: 14px 32px; font-size: 14px; }
+.wf-btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* === CONTAINER === */
+.wf-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* === GRID === */
+.wf-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.wf-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+.wf-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+.wf-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.wf-grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.wf-col-6040 { display: grid; grid-template-columns: 60% 40%; gap: 48px; align-items: center; }
+.wf-col-4060 { display: grid; grid-template-columns: 40% 60%; gap: 48px; align-items: center; }
+.wf-col-5050 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+
+/* === PLACEHOLDER === */
+.wf-img {
+  background: #e8e8e8;
+  border: 2px dashed #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 11px;
+  text-align: center;
+  padding: 12px;
+  font-style: italic;
+}
+
+/* === TYPOGRAFIE === */
+.wf-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #555;
+  border: 1px solid #bbb;
+  padding: 4px 10px;
+  margin-bottom: 14px;
+}
+.wf-tag.new { border-color: #1a1a1a; color: #1a1a1a; }
+.wf-tag.theme { background: #f5f5f5; border-color: #ddd; }
+
+.wf-h1 { font-size: 42px; font-weight: bold; line-height: 1.12; color: #1a1a1a; margin-bottom: 18px; }
+.wf-h2 { font-size: 30px; font-weight: bold; line-height: 1.2; color: #1a1a1a; margin-bottom: 14px; }
+.wf-h3 { font-size: 20px; font-weight: bold; line-height: 1.25; color: #1a1a1a; margin-bottom: 10px; }
+.wf-h4 { font-size: 15px; font-weight: bold; color: #1a1a1a; margin-bottom: 8px; }
+.wf-body { font-size: 14px; color: #555; line-height: 1.65; margin-bottom: 12px; }
+.wf-body-lg { font-size: 16px; color: #555; line-height: 1.65; margin-bottom: 16px; }
+.wf-label { font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 8px; }
+
+/* === SECTIES: ACHTERGRONDEN === */
+.wf-bg-white { background: #fff; }
+.wf-bg-light { background: #fafafa; }
+.wf-bg-gray  { background: #f2f2f2; }
+.wf-bg-dark  { background: #1a1a1a; color: #fff; }
+.wf-bg-dark .wf-h2 { color: #fff; }
+.wf-bg-dark .wf-h3 { color: #fff; }
+.wf-bg-dark .wf-body { color: #ccc; }
+.wf-bg-dark .wf-label { color: #666; }
+.wf-cta-dark { background: #1a1a1a; color: #fff; }
+.wf-cta-dark .wf-h2 { color: #fff; }
+.wf-cta-dark .wf-body { color: #aaa; }
+.wf-cta-dark .wf-label { color: #555; }
+.wf-cta-dark .wf-section-label { background: #222; }
+
+/* === PADDING === */
+.wf-pad-xl  { padding: 100px 48px; }
+.wf-pad-lg  { padding: 80px 48px; }
+.wf-pad-md  { padding: 60px 48px; }
+.wf-pad-sm  { padding: 40px 48px; }
+.wf-pad-xs  { padding: 24px 48px; }
+
+/* === KAARTEN === */
+.wf-card {
+  border: 2px solid #ddd;
+  background: #fff;
+  padding: 28px;
+}
+.wf-card-sm {
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  padding: 20px;
+}
+.wf-card-dark {
+  border: 2px solid #333;
+  background: #111;
+  padding: 28px;
+  color: #fff;
+}
+
+/* === THEMA-KAARTEN === */
+.wf-theme-card {
+  border: 2px solid #ddd;
+  padding: 30px 24px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.wf-theme-card:hover { border-color: #1a1a1a; }
+.wf-theme-card .wf-tc-number { font-size: 10px; color: #bbb; font-weight: bold; margin-bottom: 10px; }
+.wf-theme-card .wf-tc-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+.wf-theme-card .wf-tc-arrow { position: absolute; right: 20px; bottom: 24px; font-size: 18px; color: #bbb; }
+
+/* === PRODUCT KAART === */
+.wf-product-card {
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  padding: 22px;
+}
+.wf-product-tag {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: #f0f0f0;
+  color: #666;
+  padding: 3px 8px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.wf-product-tag.cdp { background: #1a1a1a; color: #fff; }
+
+/* === FEATURE BLOK === */
+.wf-feature {
+  padding: 24px;
+  border: 1px solid #e8e8e8;
+  background: #fafafa;
+}
+.wf-feature-icon {
+  width: 40px;
+  height: 40px;
+  background: #e0e0e0;
+  border: 1px dashed #bbb;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* === TRUST BAR === */
+.wf-trust-bar {
+  background: #f7f7f7;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 14px 48px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.wf-trust-item { font-size: 12px; color: #666; display: flex; align-items: center; gap: 8px; }
+.wf-trust-logo { width: 72px; height: 22px; background: #ddd; border: 1px dashed #ccc; display: inline-block; }
+.wf-trust-score { font-weight: bold; font-size: 13px; color: #1a1a1a; }
+
+/* === STATISTIEKEN === */
+.wf-stats { display: flex; border: 1px solid #e0e0e0; }
+.wf-stat {
+  flex: 1;
+  padding: 32px 24px;
+  text-align: center;
+  border-right: 1px solid #e0e0e0;
+}
+.wf-stat:last-child { border-right: none; }
+.wf-stat-number { font-size: 36px; font-weight: bold; display: block; margin-bottom: 6px; }
+.wf-stat-label { font-size: 12px; color: #666; }
+
+/* === LIJSTEN === */
+.wf-checklist { list-style: none; }
+.wf-checklist li { padding: 6px 0 6px 22px; font-size: 13px; color: #444; position: relative; border-bottom: 1px solid #f0f0f0; }
+.wf-checklist li::before { content: '✓'; position: absolute; left: 0; color: #999; font-weight: bold; }
+.wf-checklist li:last-child { border-bottom: none; }
+
+.wf-list { list-style: none; }
+.wf-list li { padding: 5px 0 5px 16px; font-size: 13px; color: #555; position: relative; }
+.wf-list li::before { content: '—'; position: absolute; left: 0; color: #bbb; }
+
+/* === STAPPEN === */
+.wf-steps { display: flex; flex-direction: column; gap: 0; }
+.wf-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+.wf-step:last-child { border-bottom: none; }
+.wf-step-num {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* === DRIE-LAAGS CDP MODEL === */
+.wf-layer-col {
+  padding: 32px 28px;
+  border: 2px solid #ddd;
+  background: #fff;
+}
+.wf-layer-col.collect   { border-top: 5px solid #777; }
+.wf-layer-col.understand { border-top: 5px solid #444; }
+.wf-layer-col.act        { border-top: 5px solid #111; }
+.wf-layer-col .wf-layer-name {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  color: #555;
+}
+
+/* === FLYWHEEL PLACEHOLDER === */
+.wf-flywheel {
+  width: 100%;
+  height: 480px;
+  background: #f5f5f5;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  color: #999;
+  font-size: 13px;
+  font-style: italic;
+}
+.wf-flywheel strong { font-size: 15px; color: #666; font-style: normal; }
+
+/* === INTEGRATIE LOGOS === */
+.wf-integration-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+}
+.wf-integration-item {
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.wf-integration-logo { width: 48px; height: 28px; background: #e8e8e8; border: 1px dashed #ccc; }
+.wf-integration-name { font-size: 10px; color: #888; text-align: center; }
+.wf-integration-badge {
+  font-size: 8px;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 1px 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* === PRIJSKAARTEN === */
+.wf-pricing-card {
+  border: 2px solid #ddd;
+  padding: 36px 28px;
+  background: #fff;
+  text-align: center;
+}
+.wf-pricing-card.featured {
+  border-color: #1a1a1a;
+  background: #fafafa;
+}
+.wf-price { font-size: 40px; font-weight: bold; margin: 16px 0 4px; }
+.wf-price-period { font-size: 12px; color: #888; margin-bottom: 24px; }
+.wf-pricing-features { text-align: left; margin-bottom: 24px; }
+
+/* === CTA SECTIE === */
+.wf-cta-section {
+  text-align: center;
+  padding: 80px 48px;
+}
+.wf-cta-benefits {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.wf-cta-benefit { font-size: 13px; color: #888; display: flex; align-items: center; gap: 8px; }
+
+/* === CASES === */
+.wf-case-card {
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  padding: 28px;
+}
+.wf-case-number { font-size: 32px; font-weight: bold; margin-bottom: 4px; }
+.wf-case-desc { font-size: 12px; color: #888; margin-bottom: 14px; }
+
+/* === TESTIMONIAL === */
+.wf-testimonial {
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+  padding: 28px;
+}
+.wf-testimonial-text { font-size: 14px; color: #444; font-style: italic; margin-bottom: 16px; line-height: 1.6; }
+.wf-testimonial-author { font-size: 12px; font-weight: bold; color: #1a1a1a; }
+.wf-testimonial-role { font-size: 11px; color: #888; }
+.wf-avatar { width: 40px; height: 40px; background: #ddd; border-radius: 50%; border: 1px dashed #bbb; display: inline-block; flex-shrink: 0; }
+
+/* === FAQ === */
+.wf-faq-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 20px 0;
+}
+.wf-faq-q { font-size: 14px; font-weight: bold; color: #1a1a1a; margin-bottom: 10px; display: flex; justify-content: space-between; }
+.wf-faq-a { font-size: 13px; color: #555; line-height: 1.6; }
+
+/* === MEDIA BALK === */
+.wf-media-bar {
+  padding: 24px 48px;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+.wf-media-logos { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+.wf-media-logo { width: 90px; height: 28px; background: #e0e0e0; border: 1px dashed #ccc; }
+
+/* === FOOTER === */
+.wf-footer {
+  background: #111;
+  color: #fff;
+  padding: 56px 48px 32px;
+}
+.wf-footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #2a2a2a;
+}
+.wf-footer-logo { width: 80px; height: 28px; background: #333; margin-bottom: 16px; }
+.wf-footer-tagline { font-size: 12px; color: #666; line-height: 1.6; margin-bottom: 20px; }
+.wf-footer-col-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #555; margin-bottom: 14px; font-weight: bold; }
+.wf-footer-link { display: block; font-size: 12px; color: #888; margin-bottom: 8px; text-decoration: none; }
+.wf-footer-link:hover { color: #fff; }
+.wf-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #555;
+}
+
+/* === DIVIDER === */
+.wf-divider { height: 1px; background: #e8e8e8; margin: 32px 0; }
+.wf-divider-dark { height: 1px; background: #2a2a2a; margin: 32px 0; }
+
+/* === ANNOTATIE === */
+.wf-annotation {
+  border: 1px dashed #e8a000;
+  background: #fffbf0;
+  padding: 8px 14px;
+  font-size: 11px;
+  color: #a06000;
+  margin: 10px 0;
+  display: inline-block;
+}
+
+/* ============================================================
+   RELEASE CHANGELOG BANNER + UPDATE BADGES
+   Banner verschijnt onder wf-file-nav. Wordt gevuld door changelog.js.
+   ============================================================ */
+
+.wf-changelog-banner {
+  background: #fffbe6;
+  border-bottom: 2px solid #f5c842;
+  font-size: 12px;
+  color: #5a4500;
+}
+.wf-changelog-banner.empty { display: none; }
+
+.wf-changelog-header {
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  user-select: none;
+  flex-wrap: wrap;
+}
+.wf-changelog-version {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 3px 10px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.wf-changelog-date {
+  color: #7a6500;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.wf-changelog-summary {
+  flex: 1;
+  font-weight: 600;
+  color: #3a2c00;
+}
+.wf-changelog-toggle {
+  font-size: 11px;
+  color: #7a6500;
+  text-decoration: underline;
+  font-weight: bold;
+}
+.wf-changelog-banner.expanded .wf-changelog-toggle::after { content: ''; }
+
+.wf-changelog-details {
+  display: none;
+  padding: 4px 24px 16px;
+  border-top: 1px dashed #f5c842;
+  background: #fffbe6;
+}
+.wf-changelog-banner.expanded .wf-changelog-details { display: block; }
+
+.wf-changelog-version-block {
+  padding: 14px 0;
+  border-bottom: 1px dashed #e8d575;
+}
+.wf-changelog-version-block:last-child { border-bottom: none; }
+.wf-changelog-version-block h4 {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0 0 8px;
+  color: #1a1a1a;
+}
+.wf-changelog-version-block h4 .v-date {
+  color: #888;
+  font-weight: normal;
+  margin-left: 8px;
+}
+.wf-changelog-version-block ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.wf-changelog-version-block li {
+  font-size: 12px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 5px;
+  padding-left: 0;
+}
+.wf-changelog-version-block li::before { content: ''; }
+.wf-changelog-version-block li .cl-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  margin-right: 8px;
+  border-radius: 2px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  color: #fff;
+}
+.wf-changelog-version-block li .cl-tag.new      { background: #2e7d32; }
+.wf-changelog-version-block li .cl-tag.updated  { background: #ef6c00; }
+.wf-changelog-version-block li .cl-tag.removed  { background: #c62828; }
+.wf-changelog-version-block li .cl-page {
+  font-size: 10px;
+  color: #888;
+  margin-left: 6px;
+  font-style: italic;
+}
+
+/* === INLINE UPDATE BADGES (naast secties of elementen die veranderd zijn) === */
+.wf-update-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin-left: 6px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  color: #fff;
+}
+.wf-update-badge.new      { background: #2e7d32; }
+.wf-update-badge.updated  { background: #ef6c00; }
+.wf-update-badge.removed  { background: #c62828; }
+
+/* Sectie-level highlight bij wijziging — subtiele linker rand */
+.wf-section.is-new     { box-shadow: inset 5px 0 0 #2e7d32; }
+.wf-section.is-updated { box-shadow: inset 5px 0 0 #ef6c00; }
+
+/* === UTILITY === */
+.mb-6  { margin-bottom: 6px; }
+.mb-8  { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-32 { margin-bottom: 32px; }
+.mb-40 { margin-bottom: 40px; }
+.mb-48 { margin-bottom: 48px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-32 { margin-top: 32px; }
+.mt-40 { margin-top: 40px; }
+.text-center { text-align: center; }
+.text-muted  { color: #888; }
+.text-xs  { font-size: 11px; }
+.text-sm  { font-size: 12px; }
+.font-bold { font-weight: bold; }
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; }
+.gap-8  { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.gap-24 { gap: 24px; }
+.gap-32 { gap: 32px; }
