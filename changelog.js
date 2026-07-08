@@ -16,6 +16,11 @@
                en plaatst een inline marker bij het element.
    ============================================================ */
 
+/* Final mode: toont alleen "Final version" in de balk, zonder
+   wijzigingen-verwijzing en zonder inline markers.
+   Zet op false om de volledige changelog-banner terug te krijgen. */
+window.SERO_FINAL = true;
+
 window.SERO_CHANGELOG = [
   {
     version: '1.3',
@@ -151,6 +156,14 @@ window.SERO_CHANGELOG = [
   function renderBanner() {
     var container = document.getElementById('wf-changelog-banner');
     if (!container) return;
+
+    if (window.SERO_FINAL) {
+      container.innerHTML =
+        '<div class="wf-changelog-header" style="cursor:default;">' +
+          '<span class="wf-changelog-version">Final version</span>' +
+        '</div>';
+      return;
+    }
 
     var versions = window.SERO_CHANGELOG || [];
     if (versions.length === 0) {
@@ -291,7 +304,7 @@ window.SERO_CHANGELOG = [
 
   function init() {
     renderBanner();
-    placeInlineMarkers();
+    if (!window.SERO_FINAL) placeInlineMarkers();
   }
 
   if (document.readyState === 'loading') {
