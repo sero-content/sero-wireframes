@@ -23,6 +23,14 @@ window.SERO_FINAL = true;
 
 window.SERO_CHANGELOG = [
   {
+    version: '1.4',
+    date: '2026-07-09',
+    summary: 'CDP stats-kaarten vervangen door commerciële CDP-USP\'s',
+    changes: [
+      { type: 'updated', text: 'S3 stats herschreven: "Live bij eerste klanten" en "1 profiel per klant" vervangen door 360° klantbeeld, real-time gedragsdata, 100% A/B-getest en 12+ integraties. Sluit beter aan bij wat kopers van een CDP verwachten en straalt meer maturiteit uit.', pages: ['cdp.html'], anchor: '.wf-stats' }
+    ]
+  },
+  {
     version: '1.3',
     date: '2026-05-18',
     summary: 'Changelog-banner items klikbaar + inline markers met tooltip op gewijzigde elementen',
